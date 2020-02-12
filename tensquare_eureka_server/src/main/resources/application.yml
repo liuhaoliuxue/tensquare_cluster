@@ -1,0 +1,30 @@
+# 集群版
+spring:
+  application:
+    name: EUREKA-HA
+
+---
+server:
+  port: 10086
+spring:
+  # 指定profile=eureka-server1
+  profiles: centos4
+eureka:
+  instance:
+    hostname: 192.168.1.136
+  client:
+    service-url:
+     # 将自己注册到centos4、centos5这个Eureka上面去
+      defaultZone: http://192.168.1.136:10086/eureka/,http://192.168.1.137:10086/eureka/
+
+---
+server:
+  port: 10086
+spring:
+  profiles: centos5
+eureka:
+  instance:
+    hostname: 192.168.1.137
+  client:
+    service-url:
+      defaultZone: http://192.168.1.136:10086/eureka/,http://192.168.1.137:10086/eureka/

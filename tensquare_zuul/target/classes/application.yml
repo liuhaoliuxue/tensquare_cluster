@@ -1,0 +1,47 @@
+server:
+  port: 10020 # 端口
+  
+# 基本服务信息
+spring:
+  application:
+    name: tensquare-zuul # 服务ID
+    
+# Eureka配置
+eureka:
+  client:
+    service-url:  
+      defaultZone: http://localhost:10086/eureka # Eureka访问地址
+  instance:
+    prefer-ip-address: true
+  
+# 修改ribbon的超时时间
+ribbon:
+  ConnectTimeout: 1500 # 连接超时时间，默认500ms
+  ReadTimeout: 3000  # 请求超时时间，默认1000ms
+  
+  
+# 修改hystrix的熔断超时时间
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMillisecond: 2000 # 熔断超时时长，默认1000ms
+            
+
+# 网关路由配置
+zuul:
+  routes:
+    admin:
+      path: /admin/**
+      serviceId: tensquare-admin-service
+    gathering:
+          path: /gathering/**
+          serviceId: tensquare-gathering
+
+ # jwt参数
+jwt:
+  config:
+    key: itcast
+    ttl: 1800000

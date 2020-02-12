@@ -1,0 +1,17 @@
+server:
+  port: 10086  # 端口
+  
+# 基本服务信息
+spring:
+  application:
+    name: eureka-server # 服务ID
+   
+# eureka服务器配置
+eureka:
+  client:
+    fetch-registry: false 
+    register-with-eureka: false
+    service-url:
+      defaultZone: http://localhost:${server.port}/eureka  # 暴露Eureka服务访问地址
+  server:
+    enable-self-preservation: false # 关闭自我保护
